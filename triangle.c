@@ -16,7 +16,7 @@ int main(void)
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         exit(EXIT_FAILURE);
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Triangle", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -59,17 +59,6 @@ int main(void)
         glVertex3f(0.7f, -0.8f, 0.f);
         glVertex3f(0.45f, -0.4f, 0.f);
         glEnd();
-		
-		glBegin(GL_TRIANGLES);
-		glColor3f(1.f, 0.f, 0.f);
-        glVertex3f(-0.6f, 0.f, 0.f);
-		glColor3f(0.f, 1.f, 0.f);
-        glVertex3f(0.6f, 0.f, 0.f);
-		glColor3f(0.f, 0.f, 1.f);		
-        glVertex3f(0.f, 1.0f, 0.f);
-        glEnd();
-		
-		
 		
         glfwSwapBuffers(window);
         glfwPollEvents();
