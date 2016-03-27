@@ -46,9 +46,8 @@ int main(void)
         glVertex3f(0.6f, -0.4f, 0.f);
 		glColor3f(0.f, 0.f, 1.f);		
         glVertex3f(0.f, 0.6f, 0.f);
-        glEnd();
-		
-		
+        glEnd();       
+   
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
