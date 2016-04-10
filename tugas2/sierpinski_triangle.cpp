@@ -10,6 +10,38 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
 }
+
+void drawSierpinski(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+    
+    glBegin(GL_LINES);
+    glVertex2f(-0.6f, -0.4f);
+    glVertex2f(0.6f, -0.4f);      
+    glEnd();     
+
+    glBegin(GL_LINES);
+    glVertex2f(-0.6f, -0.4f);
+    glVertex2f(0.f, 0.6f);     
+    glEnd();   
+
+    glBegin(GL_LINES);
+    glVertex2f(0.f, 0.6f); 
+    glVertex2f(0.6f, -0.4f);      
+    glEnd();     
+    
+    /*
+   subTriangle
+    (
+      1,
+      (x1 + x2) / 2,
+      (y1 + y2) / 2,
+      (x1 + x3) / 2,
+      (y1 + y3) / 2,
+      (x2 + x3) / 2,
+      (y2 + y3) / 2 
+    );*/
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -39,14 +71,7 @@ int main(void)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 		
-		glBegin(GL_TRIANGLES);
-		glColor3f(1.f, 0.f, 0.f);
-        glVertex3f(-0.6f, -0.4f, 0.f);
-		glColor3f(0.f, 1.f, 0.f);
-        glVertex3f(0.6f, -0.4f, 0.f);
-		glColor3f(0.f, 0.f, 1.f);		
-        glVertex3f(0.f, 0.6f, 0.f);
-        glEnd();       
+		drawSierpinski(-0.6f,-0.4f,0.6f,-0.4f,0.f,0.6f);  
    
         glfwSwapBuffers(window);
         glfwPollEvents();
