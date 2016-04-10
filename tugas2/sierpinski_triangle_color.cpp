@@ -19,13 +19,36 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-void drawTriangleColor(vector< Point > trianglePoint){
+void drawDepth(int depth){
+	int d = depth % 5;
+	switch(d){
+		case 0 :
+			glColor3f(1.f,0.f,0.f);
+			break;
+		case 1 : 
+			glColor3f(1.f,1.f,0.f);
+			break;
+		case 2 :
+			glColor3f(1.f,0.f,1.f);
+			break;
+		case 3 : 
+			glColor3f(0.f,1.f,1.f);
+			break;
+		case 4 : 
+			glColor3f(0.f,1.f,0.f);
+			break;
+		default :
+			glColor3f(0.f,0.f,1.f);
+			break;
+	}
+
+}
+
+void drawTriangleColor(vector< Point > trianglePoint,int i){
 	glBegin(GL_TRIANGLES);
-	glColor3f(1.f, 0.f, 0.f);
+	drawDepth(i);
 	glVertex2f(trianglePoint[0].x, trianglePoint[0].y);
-	glColor3f(0.f, 1.f, 0.f);
-	glVertex2f(trianglePoint[1].x, trianglePoint[1].y);
-	glColor3f(0.f, 0.f, 1.f);		
+	glVertex2f(trianglePoint[1].x, trianglePoint[1].y);	
 	glVertex2f(trianglePoint[2].x, trianglePoint[2].y);
 	glEnd();	
 }
@@ -50,7 +73,7 @@ void drawSierpinski(vector< vector < Point > > list, int n)
 			p.y = (list[i][list[i].size()-1].y + list[i][0].y)/2;
 			trianglePoint.push_back(p);
 			//new_list.push_back(trianglePoint);
-			drawTriangleColor(trianglePoint);
+			drawTriangleColor(trianglePoint,n);
 			for(int k=1; k<list[i].size();k++){
 				trianglePoint2.clear();
 				p = trianglePoint[k-1];
@@ -123,7 +146,7 @@ int main(int argc, char *argv[])
 		p.y = -0.4f;
 		trianglePoint.push_back(p);
 		list.push_back(trianglePoint);
-		drawTriangleColor(trianglePoint);
+		drawTriangleColor(trianglePoint,3);
 		drawSierpinski(list,loop);  
    
         glfwSwapBuffers(window);

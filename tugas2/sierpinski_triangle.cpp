@@ -21,8 +21,10 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 void drawTriangle(vector< Point > trianglePoint){
 	for(int i=0; i<trianglePoint.size()-1; i++){
-		glBegin(GL_LINES);
+		glBegin(GL_POINTS);
 		glVertex2f(trianglePoint[i].x, trianglePoint[i].y);
+		glEnd(); 
+		glBegin(GL_POINTS);
 		glVertex2f(trianglePoint[i+1].x, trianglePoint[i+1].y);
 		glEnd(); 
 	}
