@@ -19,18 +19,15 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-void drawTriangle(vector< Point > trianglePoint){
-	for(int i=0; i<trianglePoint.size()-1; i++){
-		glBegin(GL_LINES);
-		glVertex2f(trianglePoint[i].x, trianglePoint[i].y);
-		glVertex2f(trianglePoint[i+1].x, trianglePoint[i+1].y);
-		glEnd(); 
-	}
-	glBegin(GL_LINES);
-	glVertex2f(trianglePoint[trianglePoint.size()-1].x, trianglePoint[trianglePoint.size()-1].y);
+void drawTriangleColor(vector< Point > trianglePoint){
+	glBegin(GL_TRIANGLES);
+	glColor3f(1.f, 0.f, 0.f);
 	glVertex2f(trianglePoint[0].x, trianglePoint[0].y);
-	glEnd();
-	
+	glColor3f(0.f, 1.f, 0.f);
+	glVertex2f(trianglePoint[1].x, trianglePoint[1].y);
+	glColor3f(0.f, 0.f, 1.f);		
+	glVertex2f(trianglePoint[2].x, trianglePoint[2].y);
+	glEnd();	
 }
 
 void drawSierpinski(vector< vector < Point > > list, int n)
@@ -53,7 +50,7 @@ void drawSierpinski(vector< vector < Point > > list, int n)
 			p.y = (list[i][list[i].size()-1].y + list[i][0].y)/2;
 			trianglePoint.push_back(p);
 			//new_list.push_back(trianglePoint);
-			drawTriangle(trianglePoint);
+			drawTriangleColor(trianglePoint);
 			for(int k=1; k<list[i].size();k++){
 				trianglePoint2.clear();
 				p = trianglePoint[k-1];
@@ -113,7 +110,6 @@ int main(int argc, char *argv[])
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 		
-		//int loop = 7;
 		vector< vector < Point > > list;
 		vector< Point > trianglePoint;
 		Point p;
@@ -127,7 +123,7 @@ int main(int argc, char *argv[])
 		p.y = -0.4f;
 		trianglePoint.push_back(p);
 		list.push_back(trianglePoint);
-		drawTriangle(trianglePoint);
+		drawTriangleColor(trianglePoint);
 		drawSierpinski(list,loop);  
    
         glfwSwapBuffers(window);
