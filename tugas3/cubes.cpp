@@ -27,7 +27,6 @@ static void drawCube(string code, float x, float y, float z){
     glVertex3f( x - 0.5f, y - 0.5f, z-0.5f );
     glEnd(); 
     
-    
     if(code.substr(1,1)=="1"){
         //left green
         glColor3f(   0.0,  0.7,  0.3 );
@@ -42,7 +41,6 @@ static void drawCube(string code, float x, float y, float z){
     glVertex3f( x - 0.5, y - 0.5, z-0.5 );
     glEnd();
     
-
     if(code.substr(2,1)=="1"){
         // right red
         glColor3f(  1.0,  0.3,  0.3 );
@@ -57,7 +55,6 @@ static void drawCube(string code, float x, float y, float z){
     glVertex3f( x + 0.5, y - 0.5,  z+0.5 );
     glEnd();
     
-
     if(code.substr(3,1)=="1"){
         //top blue
         glColor3f( 0.0, 0.3, 0.7 ); 
@@ -72,7 +69,6 @@ static void drawCube(string code, float x, float y, float z){
     glVertex3f( x - 0.5, y + 0.5, z+ 0.5 );
     glEnd();
     
-     
     if(code.substr(4,1)=="1"){
         //bottom orange
         glColor3f(   1.0,  0.5,  0.0 );
@@ -86,7 +82,6 @@ static void drawCube(string code, float x, float y, float z){
     glVertex3f( x - 0.5, y - 0.5, z+ 0.5 );
     glVertex3f( x - 0.5, y - 0.5, z-0.5 );
     glEnd();
-    
     
     if(code.substr(5,1)=="1"){
         //back white
@@ -103,9 +98,11 @@ static void drawCube(string code, float x, float y, float z){
     glEnd();
 }
 
-double rotate_x = 0;
-double rotate_y = 0;
+int rotate_x = -45;
+int rotate_y = 45;
 float dis = 1.2;
+
+int rotate1 = 0;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -113,18 +110,11 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GL_TRUE);
 
       //  Right arrow - increase rotation by 5 degree
-      if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
-        rotate_y += 5;
-     
-      //  Left arrow - decrease rotation by 5 degree
-      else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-        rotate_y -= 5;
-     
-      else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-        rotate_x += 5;
-     
-      else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) 
-        rotate_x -= 5;
+      if (key == GLFW_KEY_D && action == GLFW_PRESS){
+        rotate_x += 180;
+        rotate_x = rotate_x % 360;
+      }
+        
 }
 
 int main(void)
