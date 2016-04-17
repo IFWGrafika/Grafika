@@ -20,6 +20,11 @@ class Cube{
 		float getZ();
 		int getRotateX();
 		int getRotateY();
+		int getRotateZ();
+
+		void setRotateX(int _x);
+		void setRotateY(int _y);
+		void setRotateZ(int _z);
 
 	private:
 		float x;

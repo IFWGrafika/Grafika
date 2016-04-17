@@ -40,6 +40,20 @@ int Cube::getRotateX(){
 int Cube::getRotateY(){
     return prop.getRotateY();
 }
+int Cube::getRotateZ(){
+    return prop.getRotateZ();
+}
+
+void Cube::setRotateX(int _x){
+    prop.setRotateX(_x);
+}
+void Cube::setRotateY(int _y){
+    prop.setRotateY(_y);
+}
+
+void Cube::setRotateZ(int _z){
+    prop.setRotateZ(_z);
+}
 
 Property Cube::getProperty(){
     return prop;
@@ -48,3 +62,4 @@ Property Cube::getProperty(){
 void Cube::setProperty(Property _prop){
     prop = _prop;
 }
+
