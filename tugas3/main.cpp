@@ -140,6 +140,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         swapProp(4,22);
         swapProp(4,10);
       }
+
+      else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+        rotate_y += 90;
+     
+      //  Left arrow - decrease rotation by 5 degree
+      else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+        rotate_y -= 90;
 }
 
 int main(void)
@@ -160,17 +167,23 @@ int main(void)
     glfwSetKeyCallback(window, key_callback);
     glEnable(GL_DEPTH_TEST);
 
-    //dari kiri atas ke kanan
+    //0
     Rubik.push_back(Cube("110100",-dis,dis,-dis));
+    //1
     Rubik.push_back(Cube("100100",0,dis,-dis));
+    //2
     Rubik.push_back(Cube("101100",dis,dis,-dis));
-    //dari kiri tengah ke kanan
+    //3
     Rubik.push_back(Cube("110000",-dis,0,-dis));
+    //4
     Rubik.push_back(Cube("100000",0,0,-dis));
+    //5
     Rubik.push_back(Cube("101000",dis,0,-dis));
-    //dari kiri bawah ke kanan
+    //6
     Rubik.push_back(Cube("110010",-dis,-dis,-dis));
+    //7
     Rubik.push_back(Cube("100010",0,-dis,-dis));
+    //8
     Rubik.push_back(Cube("101010",dis,-dis,-dis));
 
     Rubik.push_back(Cube("010100",-dis,dis,0));
@@ -200,25 +213,41 @@ int main(void)
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float) height;
         glViewport(0, 0, width, height);
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);  
         
+        // glScalef(0.1,0.1,0.1);
+        // glRotatef(rotate_x,1.0,0.0,0.0);
+        // glRotatef(rotate_y,0.0,1.0,0.0);
         
         for(int i = 0;i<Rubik.size();i++){
-            glTranslatef(-Rubik.at(i).getX(),-Rubik.at(i).getY(),-Rubik.at(i).getZ());
-            glRotatef((float)Rubik.at(i).getRotateX(), 1.0, 0.0, 0.0 );
-            glRotatef((float)Rubik.at(i).getRotateY(), 0.0, 1.0, 0.0 );
-            glRotatef((float)Rubik.at(i).getRotateZ(), 0.0, 0.0, 1.0 );
-            glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
-            glScalef(0.1,0.1,0.1);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+
             glRotatef(rotate_x,1.0,0.0,0.0);
             glRotatef(rotate_y,0.0,1.0,0.0);
+            
+            glTranslatef(Rubik.at(i).getX(),0,0);
+            glRotatef((float)Rubik.at(i).getRotateX(), 1.0, 0.0, 0.0 );
+            glTranslatef(-Rubik.at(i).getX(),0,0);
+
+            glTranslatef(0,Rubik.at(i).getY(),0);
+            glRotatef((float)Rubik.at(i).getRotateY(), 0.0, 1.0, 0.0 );
+            glTranslatef(0,-Rubik.at(i).getY(),0);
+
+            glTranslatef(0,0,Rubik.at(i).getZ());
+            glRotatef((float)Rubik.at(i).getRotateZ(), 0.0, 0.0, 1.0 );
+            glTranslatef(0,0,-Rubik.at(i).getZ());
+
+            glScalef(0.1,0.1,0.1);
+            
             drawCube(Rubik.at(i));
+            glPopMatrix();
             glLoadIdentity();
+        
+            // glLoadIdentity();
         }
 
         glFlush();
