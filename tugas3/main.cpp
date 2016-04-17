@@ -308,6 +308,76 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         Rubik.at(24).addRotation(Rotation('x',-90));
       }
 
+      else if (key == GLFW_KEY_U && action == GLFW_PRESS){
+        Rubik.at(0).addRotation(Rotation('z',-90));
+        Rubik.at(1).addRotation(Rotation('z',-90));
+        Rubik.at(2).addRotation(Rotation('z',-90));
+        Rubik.at(3).addRotation(Rotation('z',-90));
+        Rubik.at(4).addRotation(Rotation('z',-90));
+        Rubik.at(5).addRotation(Rotation('z',-90));
+        Rubik.at(6).addRotation(Rotation('z',-90));
+        Rubik.at(7).addRotation(Rotation('z',-90));
+        Rubik.at(8).addRotation(Rotation('z',-90));
+      }
+      else if (key == GLFW_KEY_J && action == GLFW_PRESS){
+        Rubik.at(0).addRotation(Rotation('z',90));
+        Rubik.at(1).addRotation(Rotation('z',90));
+        Rubik.at(2).addRotation(Rotation('z',90));
+        Rubik.at(3).addRotation(Rotation('z',90));
+        Rubik.at(4).addRotation(Rotation('z',90));
+        Rubik.at(5).addRotation(Rotation('z',90));
+        Rubik.at(6).addRotation(Rotation('z',90));
+        Rubik.at(7).addRotation(Rotation('z',90));
+        Rubik.at(8).addRotation(Rotation('z',90));
+      }
+
+      else if (key == GLFW_KEY_I && action == GLFW_PRESS){
+        Rubik.at(9).addRotation(Rotation('z',-90));
+        Rubik.at(10).addRotation(Rotation('z',-90));
+        Rubik.at(11).addRotation(Rotation('z',-90));
+        Rubik.at(12).addRotation(Rotation('z',-90));
+        Rubik.at(13).addRotation(Rotation('z',-90));
+        Rubik.at(14).addRotation(Rotation('z',-90));
+        Rubik.at(15).addRotation(Rotation('z',-90));
+        Rubik.at(16).addRotation(Rotation('z',-90));
+        Rubik.at(17).addRotation(Rotation('z',-90));
+      }
+      else if (key == GLFW_KEY_K && action == GLFW_PRESS){
+        Rubik.at(9).addRotation(Rotation('z',90));
+        Rubik.at(10).addRotation(Rotation('z',90));
+        Rubik.at(11).addRotation(Rotation('z',90));
+        Rubik.at(12).addRotation(Rotation('z',90));
+        Rubik.at(13).addRotation(Rotation('z',90));
+        Rubik.at(14).addRotation(Rotation('z',90));
+        Rubik.at(15).addRotation(Rotation('z',90));
+        Rubik.at(16).addRotation(Rotation('z',90));
+        Rubik.at(17).addRotation(Rotation('z',90));
+      }
+
+      else if (key == GLFW_KEY_O && action == GLFW_PRESS){
+        Rubik.at(18).addRotation(Rotation('z',-90));
+        Rubik.at(19).addRotation(Rotation('z',-90));
+        Rubik.at(20).addRotation(Rotation('z',-90));
+        Rubik.at(21).addRotation(Rotation('z',-90));
+        Rubik.at(22).addRotation(Rotation('z',-90));
+        Rubik.at(23).addRotation(Rotation('z',-90));
+        Rubik.at(24).addRotation(Rotation('z',-90));
+        Rubik.at(25).addRotation(Rotation('z',-90));
+        Rubik.at(26).addRotation(Rotation('z',-90));
+      }
+      else if (key == GLFW_KEY_L && action == GLFW_PRESS){
+        Rubik.at(18).addRotation(Rotation('z',90));
+        Rubik.at(19).addRotation(Rotation('z',90));
+        Rubik.at(20).addRotation(Rotation('z',90));
+        Rubik.at(21).addRotation(Rotation('z',90));
+        Rubik.at(22).addRotation(Rotation('z',90));
+        Rubik.at(23).addRotation(Rotation('z',90));
+        Rubik.at(24).addRotation(Rotation('z',90));
+        Rubik.at(25).addRotation(Rotation('z',90));
+        Rubik.at(26).addRotation(Rotation('z',90));
+      }
+
+
       else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
         rotate_y += 90;
      
