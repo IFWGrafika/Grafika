@@ -141,6 +141,29 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         swapProp(4,10);
       }
 
+      else if (key == GLFW_KEY_E && action == GLFW_PRESS){
+
+        Rubik.at(0).setRotateY((Rubik.at(0).getRotateY()+90)%360);
+        Rubik.at(1).setRotateY((Rubik.at(1).getRotateY()+90)%360);
+        Rubik.at(2).setRotateY((Rubik.at(2).getRotateY()+90)%360);
+        Rubik.at(9).setRotateY((Rubik.at(9).getRotateY()+90)%360);
+        Rubik.at(10).setRotateY((Rubik.at(10).getRotateY()+90)%360);
+        Rubik.at(11).setRotateY((Rubik.at(11).getRotateY()+90)%360);
+        Rubik.at(18).setRotateY((Rubik.at(18).getRotateY()+90)%360);
+        Rubik.at(19).setRotateY((Rubik.at(19).getRotateY()+90)%360);
+        Rubik.at(20).setRotateY((Rubik.at(20).getRotateY()+90)%360);
+
+        //bagian pinggir
+        swapProp(0,2);
+        swapProp(0,20);
+        swapProp(0,18);
+
+        //bagian tengah
+        swapProp(1,11);
+        swapProp(1,19);
+        swapProp(1,9);
+      }
+
       else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
         rotate_y += 90;
      
