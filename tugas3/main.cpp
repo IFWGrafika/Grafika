@@ -278,7 +278,7 @@ int main(void)
             glRotatef(rotate_x,1.0,0.0,0.0);
             glRotatef(rotate_y,0.0,1.0,0.0);
 
-            //glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
+            glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
 
             for(int j = Rubik.at(i).getRotation().size()-1;j>=0;j--){
                 switch(Rubik.at(i).getRotation().at(j).getCode()){
@@ -294,7 +294,7 @@ int main(void)
                 }
             }
 
-            glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
+            // glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
 
             glScalef(0.1,0.1,0.1);
             
