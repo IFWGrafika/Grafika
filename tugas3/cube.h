@@ -1,7 +1,9 @@
 #ifndef cube_h
 #define cube_h
 #include <string>
+#include <vector>
 #include "property.h"
+#include "rotation.h"
 
 using namespace std;
 
@@ -18,6 +20,10 @@ class Cube{
 		float getX();
 		float getY();
 		float getZ();
+
+		vector<Rotation> getRotation();
+		void addRotation(Rotation r);
+		
 		int getRotateX();
 		int getRotateY();
 		int getRotateZ();
@@ -30,6 +36,8 @@ class Cube{
 		float x;
 		float y;
 		float z;
+
+		vector<Rotation> rotationList;
 
 		Property prop;
 };

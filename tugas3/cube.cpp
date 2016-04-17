@@ -62,3 +62,10 @@ void Cube::setProperty(Property _prop){
     prop = _prop;
 }
 
+vector<Rotation> Cube::getRotation(){
+    return rotationList;
+}
+
+void Cube::addRotation(Rotation r){
+    return rotationList.push_back(r);
+}
