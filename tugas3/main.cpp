@@ -16,7 +16,8 @@ static void error_callback(int error, const char* description)
 bool debug = true;
 int rotate_x = -45;
 int rotate_y = 45;
-float dis = 1.2;
+float dis = 0.12;
+vector<Cube> Rubik;
 
 static void drawCube(Cube cube){
         
@@ -28,10 +29,10 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);  
-    glVertex3f( cube.getX()+ 0.5f, cube.getY()- 0.5f, cube.getZ() -0.5f ); 
-    glVertex3f( cube.getX()+ 0.5f, cube.getY()+ 0.5f, cube.getZ() -0.5f ); 
-    glVertex3f( cube.getX()- 0.5f, cube.getY()+ 0.5f, cube.getZ() -0.5f );
-    glVertex3f( cube.getX()- 0.5f, cube.getY()- 0.5f, cube.getZ() -0.5f );
+    glVertex3f(  0.5f, - 0.5f, -0.5f ); 
+    glVertex3f(  0.5f,  0.5f, -0.5f ); 
+    glVertex3f( - 0.5f,  0.5f, -0.5f );
+    glVertex3f( - 0.5f, - 0.5f, -0.5f );
     glEnd(); 
     
     if(cube.getCode().substr(1,1)=="1" ||debug){
@@ -42,10 +43,10 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);
-    glVertex3f( cube.getX()- 0.5, cube.getY()- 0.5,  cube.getZ() +0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()+ 0.5,  cube.getZ() +0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()+ 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()- 0.5, cube.getZ() -0.5 );
+    glVertex3f( - 0.5, - 0.5,  0.5 );
+    glVertex3f( - 0.5,  0.5,  0.5 );
+    glVertex3f( - 0.5,  0.5, -0.5 );
+    glVertex3f( - 0.5, - 0.5, -0.5 );
     glEnd();
     
     if(cube.getCode().substr(2,1)=="1" ||debug){
@@ -56,10 +57,10 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);
-    glVertex3f( cube.getX()+ 0.5, cube.getY()- 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()+ 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()+ 0.5,  cube.getZ() +0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()- 0.5,  cube.getZ() +0.5 );
+    glVertex3f(  0.5, - 0.5, -0.5 );
+    glVertex3f(  0.5,  0.5, -0.5 );
+    glVertex3f(  0.5,  0.5,  0.5 );
+    glVertex3f(  0.5, - 0.5,  0.5 );
     glEnd();
     
     if(cube.getCode().substr(3,1)=="1" ||debug){
@@ -70,10 +71,10 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);
-    glVertex3f( cube.getX()+ 0.5, cube.getY()+ 0.5, cube.getZ() + 0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()+ 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()+ 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()+ 0.5, cube.getZ() + 0.5 );
+    glVertex3f(  0.5,  0.5,  0.5 );
+    glVertex3f(  0.5,  0.5, -0.5 );
+    glVertex3f( - 0.5,  0.5, -0.5 );
+    glVertex3f( - 0.5,  0.5,  0.5 );
     glEnd();
     
     if(cube.getCode().substr(4,1)=="1" ||debug){
@@ -84,10 +85,10 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);
-    glVertex3f( cube.getX()+ 0.5, cube.getY()- 0.5, cube.getZ() -0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()- 0.5, cube.getZ() + 0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()- 0.5, cube.getZ() + 0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()- 0.5, cube.getZ() -0.5 );
+    glVertex3f(  0.5, - 0.5, -0.5 );
+    glVertex3f(  0.5, - 0.5,  0.5 );
+    glVertex3f( - 0.5, - 0.5,  0.5 );
+    glVertex3f( - 0.5, - 0.5, -0.5 );
     glEnd();
     
     if(cube.getCode().substr(5,1)=="1" ||debug){
@@ -98,14 +99,12 @@ static void drawCube(Cube cube){
         glColor3f(   0.0,  0.0, 0.0 );
     }
     glBegin(GL_POLYGON);
-    glVertex3f( cube.getX()+ 0.5, cube.getY()- 0.5, cube.getZ() +0.5 );
-    glVertex3f( cube.getX()+ 0.5, cube.getY()+ 0.5, cube.getZ() +0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()+ 0.5, cube.getZ() +0.5 );
-    glVertex3f( cube.getX()- 0.5, cube.getY()- 0.5, cube.getZ() +0.5 );
+    glVertex3f(  0.5, - 0.5, 0.5 );
+    glVertex3f(  0.5,  0.5, 0.5 );
+    glVertex3f( - 0.5,  0.5, 0.5 );
+    glVertex3f( - 0.5, - 0.5, 0.5 );
     glEnd();
 }
-
-static vector<Cube> Rubik;
 
 static void swapProp(int i,int j){
     Property temp = Rubik.at(i).getProperty();
@@ -131,37 +130,41 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         Rubik.at(25).setRotateX((Rubik.at(25).getRotateX()-90)%360);
 
         //bagian pinggir
-        swapProp(1,7);
-        swapProp(1,25);
-        swapProp(1,19);
+        swapProp(1,13);swapProp(13,7);
+        swapProp(7,13);swapProp(13,25);
+        swapProp(25,13);swapProp(13,19);
+        swapProp(19,13);swapProp(13,1);
 
         //bagian tengah
-        swapProp(4,16);
-        swapProp(4,22);
-        swapProp(4,10);
+        swapProp(4,13);swapProp(13,16);
+        swapProp(16,13);swapProp(13,22);
+        swapProp(22,13);swapProp(13,10);
+        swapProp(10,13);swapProp(13,4);
       }
 
       else if (key == GLFW_KEY_E && action == GLFW_PRESS){
 
-        Rubik.at(0).setRotateY((Rubik.at(0).getRotateY()+90)%360);
-        Rubik.at(1).setRotateY((Rubik.at(1).getRotateY()+90)%360);
-        Rubik.at(2).setRotateY((Rubik.at(2).getRotateY()+90)%360);
-        Rubik.at(9).setRotateY((Rubik.at(9).getRotateY()+90)%360);
-        Rubik.at(10).setRotateY((Rubik.at(10).getRotateY()+90)%360);
-        Rubik.at(11).setRotateY((Rubik.at(11).getRotateY()+90)%360);
-        Rubik.at(18).setRotateY((Rubik.at(18).getRotateY()+90)%360);
-        Rubik.at(19).setRotateY((Rubik.at(19).getRotateY()+90)%360);
-        Rubik.at(20).setRotateY((Rubik.at(20).getRotateY()+90)%360);
+        Rubik.at(0).setRotateY((Rubik.at(0).getRotateY()-90)%360);
+        Rubik.at(1).setRotateY((Rubik.at(1).getRotateY()-90)%360);
+        Rubik.at(2).setRotateY((Rubik.at(2).getRotateY()-90)%360);
+        Rubik.at(9).setRotateY((Rubik.at(9).getRotateY()-90)%360);
+        Rubik.at(10).setRotateY((Rubik.at(10).getRotateY()-90)%360);
+        Rubik.at(11).setRotateY((Rubik.at(11).getRotateY()-90)%360);
+        Rubik.at(18).setRotateY((Rubik.at(18).getRotateY()-90)%360);
+        Rubik.at(19).setRotateY((Rubik.at(19).getRotateY()-90)%360);
+        Rubik.at(20).setRotateY((Rubik.at(20).getRotateY()-90)%360);
 
         //bagian pinggir
-        swapProp(0,2);
-        swapProp(0,20);
-        swapProp(0,18);
+        swapProp(0,13);swapProp(13,2);
+        swapProp(2,13);swapProp(13,20);
+        swapProp(20,13);swapProp(13,18);
+        swapProp(18,13);swapProp(13,0);
 
         //bagian tengah
-        swapProp(1,11);
-        swapProp(1,19);
-        swapProp(1,9);
+        swapProp(1,13);swapProp(13,11);
+        swapProp(11,13);swapProp(13,19);
+        swapProp(19,13);swapProp(13,9);
+        swapProp(9,13);swapProp(13,1);
       }
 
       else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
@@ -251,19 +254,12 @@ int main(void)
 
             glRotatef(rotate_x,1.0,0.0,0.0);
             glRotatef(rotate_y,0.0,1.0,0.0);
-            
-            glTranslatef(Rubik.at(i).getX(),0,0);
+
             glRotatef((float)Rubik.at(i).getRotateX(), 1.0, 0.0, 0.0 );
-            glTranslatef(-Rubik.at(i).getX(),0,0);
-
-            glTranslatef(0,Rubik.at(i).getY(),0);
             glRotatef((float)Rubik.at(i).getRotateY(), 0.0, 1.0, 0.0 );
-            glTranslatef(0,-Rubik.at(i).getY(),0);
-
-            glTranslatef(0,0,Rubik.at(i).getZ());
             glRotatef((float)Rubik.at(i).getRotateZ(), 0.0, 0.0, 1.0 );
-            glTranslatef(0,0,-Rubik.at(i).getZ());
 
+            glTranslatef(Rubik.at(i).getX(),Rubik.at(i).getY(),Rubik.at(i).getZ());
             glScalef(0.1,0.1,0.1);
             
             drawCube(Rubik.at(i));
