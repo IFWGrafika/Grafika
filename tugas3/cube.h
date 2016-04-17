@@ -12,6 +12,9 @@ class Cube{
 		~Cube();
 
 		string getCode();
+
+		Property getProperty();
+		void setProperty(Property _prop);
 		float getX();
 		float getY();
 		float getZ();

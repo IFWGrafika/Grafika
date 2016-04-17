@@ -40,3 +40,11 @@ int Cube::getRotateX(){
 int Cube::getRotateY(){
     return prop.getRotateY();
 }
+
+Property Cube::getProperty(){
+    return prop;
+}
+
+void Cube::setProperty(Property _prop){
+    prop = _prop;
+}

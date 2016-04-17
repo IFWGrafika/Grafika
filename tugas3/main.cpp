@@ -104,6 +104,8 @@ int rotate_x = -45;
 int rotate_y = 45;
 float dis = 1.2;
 
+static vector<Cube> Rubik;
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
       if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -111,14 +113,14 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
       //  Right arrow - increase rotation by 5 degree
       if (key == GLFW_KEY_D && action == GLFW_PRESS){
-        
+            
       }
 }
 
 int main(void)
 {
     GLFWwindow* window;
-    vector<Cube> Rubik;
+    
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         exit(EXIT_FAILURE);
@@ -145,7 +147,6 @@ int main(void)
     Rubik.push_back(Cube("110010",-dis,-dis,-dis));
     Rubik.push_back(Cube("100010",0,-dis,-dis));
     Rubik.push_back(Cube("101010",dis,-dis,-dis));
-
     Rubik.push_back(Cube("010100",-dis,dis,0));
     Rubik.push_back(Cube("000100",0,dis,0));
     Rubik.push_back(Cube("001100",dis,dis,0));
