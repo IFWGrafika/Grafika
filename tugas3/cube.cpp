@@ -1,21 +1,18 @@
 #include "cube.h"
 
 Cube::Cube(){
-	code = "000000";
+	
     x = 0;
     y = 0;
     z = 0;
-    rotate_x = 0;
-    rotate_y = 0;
+    prop = Property("111111");
 }
 
 Cube::Cube(string _code, float _x, float _y, float _z){
-    code = _code;
+    prop = Property(_code);
     x = _x;
     y = _y;
     z = _z;
-    rotate_x = 0;
-    rotate_y = 0;
 }
 
 Cube::~Cube(){
@@ -23,7 +20,7 @@ Cube::~Cube(){
 }
 
 string Cube::getCode(){
-    return code;
+    return prop.getCode();
 }
 
 float Cube::getX(){
@@ -38,14 +35,8 @@ float Cube::getZ(){
 }
 
 int Cube::getRotateX(){
-    return rotate_x;
+    return prop.getRotateX();
 }
 int Cube::getRotateY(){
-    return rotate_y;
-}
-void Cube::setRotateX(int _x){
-    rotate_x = _x;
-}
-void Cube::setRotateY(int _y){
-    rotate_y = _y;
+    return prop.getRotateY();
 }

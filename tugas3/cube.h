@@ -1,6 +1,7 @@
 #ifndef cube_h
 #define cube_h
 #include <string>
+#include "property.h"
 
 using namespace std;
 
@@ -14,20 +15,15 @@ class Cube{
 		float getX();
 		float getY();
 		float getZ();
-
 		int getRotateX();
 		int getRotateY();
-		void setRotateX(int _x);
-		void setRotateY(int _y);
 
 	private:
-		string code;
 		float x;
 		float y;
 		float z;
 
-		int rotate_x;
-		int rotate_y;
+		Property prop;
 };
 
 #endif

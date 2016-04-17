@@ -185,6 +185,8 @@ int main(void)
         glScalef(0.1,0.1,0.1);
 
         for(int i = 0;i<Rubik.size();i++){
+            //glLoadIdentity();
+            //glRotatef( rotate_x, 1.0, 0.0, 0.0 );
             drawCube(Rubik.at(i));
         }
 
