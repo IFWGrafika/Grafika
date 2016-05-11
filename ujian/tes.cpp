@@ -83,7 +83,7 @@ static void drawCube(Cube cube){
 	// SPECULAR
 	GLfloat red[] = {.2f, .0f, .0f, 1.f};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, red);
-	GLfloat light_specular[] = { 0.2, 2.0, 0.3, 1.0 };
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, light_specular);
 
  	texture= LoadTexture( "dark_purple.bmp" );
@@ -98,6 +98,7 @@ static void drawCube(Cube cube){
     glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);  
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(1, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()- cube_size, cube.getZ() - cube_size  ); 
     glTexCoord2f(0, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size, cube.getZ() - cube_size ); 
     glTexCoord2f(0, 1);glVertex3f( cube.getX()- cube_size, cube.getY()+ cube_size, cube.getZ() - cube_size );
@@ -116,6 +117,7 @@ static void drawCube(Cube cube){
     glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(1, 0);glVertex3f( cube.getX()- cube_size, cube.getY()- cube_size,  cube.getZ() +cube_size );
     glTexCoord2f(0, 0);glVertex3f( cube.getX()- cube_size, cube.getY()+ cube_size,  cube.getZ() +cube_size );
     glTexCoord2f(0, 1);glVertex3f( cube.getX()- cube_size, cube.getY()+ cube_size, cube.getZ() -cube_size );
@@ -134,6 +136,7 @@ static void drawCube(Cube cube){
 	glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(0, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()- cube_size, cube.getZ() -cube_size );
     glTexCoord2f(1, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size, cube.getZ() -cube_size );
     glTexCoord2f(1, 1);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size,  cube.getZ() +cube_size );
@@ -151,6 +154,7 @@ static void drawCube(Cube cube){
     glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(1, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size, cube.getZ() + cube_size );
     glTexCoord2f(0, 1);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size, cube.getZ() -cube_size );
     glTexCoord2f(0, 0);glVertex3f( cube.getX()- cube_size, cube.getY()+ cube_size, cube.getZ() -cube_size );
@@ -168,6 +172,7 @@ static void drawCube(Cube cube){
     glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(1, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()- cube_size, cube.getZ() -cube_size );
     glTexCoord2f(0, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()- cube_size, cube.getZ() + cube_size );
     glTexCoord2f(0, 1);glVertex3f( cube.getX()- cube_size, cube.getY()- cube_size, cube.getZ() + cube_size );
@@ -184,6 +189,7 @@ static void drawCube(Cube cube){
     glEnable(GL_TEXTURE_2D);
     glBindTexture (GL_TEXTURE_2D, texture);
     glBegin(GL_POLYGON);
+    glNormal3f(cube.getX(),cube.getY(),cube.getZ());
     glTexCoord2f(1, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()- cube_size, cube.getZ() +cube_size );
     glTexCoord2f(0, 0);glVertex3f( cube.getX()+ cube_size, cube.getY()+ cube_size, cube.getZ() +cube_size );
     glTexCoord2f(0, 1);glVertex3f( cube.getX()- cube_size, cube.getY()+ cube_size, cube.getZ() +cube_size );
@@ -493,6 +499,7 @@ void render(void) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_NORMALIZE);
 
 	glLoadIdentity();
 	rotateView();
