@@ -11,6 +11,7 @@
 using namespace std;
 
 vector < vector < vector < Cube > > > Rubik;
+vector < vector < vector < Cube > > > Rubik2;
 int rotate_x = -45;
 int rotate_y = 45;
 float dis = 0.21;
@@ -47,17 +48,14 @@ GLuint LoadTexture( const char * filename )
 	   unsigned char B,R;
 	   B = data[index];
 	   R = data[index+2];
-
 	   data[index] = R;
 	   data[index+2] = B;
-
 	}
 
 	glGenTextures( 1, &texture );
 	glBindTexture( GL_TEXTURE_2D, texture );
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
-
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
@@ -69,9 +67,25 @@ GLuint LoadTexture( const char * filename )
 	return texture;
 }
 
-
 static void drawCube(Cube cube){   
 	GLuint texture;
+
+	// AMBIENT
+	GLfloat light_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	
+	// DIFFUSE
+	GLfloat cyan[] = {.0f, .8f, .8f, 1.f};
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, cyan);
+	GLfloat light_diffuse[] = { 0.0, 0.5, 0.0, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_diffuse);
+
+	// SPECULAR
+	GLfloat red[] = {.2f, .0f, .0f, 1.f};
+	glMaterialfv(GL_FRONT, GL_SPECULAR, red);
+	GLfloat light_specular[] = { 0.2, 2.0, 0.3, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_specular);
+
  	texture= LoadTexture( "dark_purple.bmp" );
 
     // if(cube.getCode().substr(0,1)=="1" ||debug){
@@ -178,7 +192,6 @@ static void drawCube(Cube cube){
 }
 
 int main(int argc, char** argv) {
-
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
         glutInitWindowPosition(100, 100);
@@ -196,61 +209,61 @@ int main(int argc, char** argv) {
 		//dari kiri atas ke kanan
 		vector < vector < Cube > > Side;
 		vector < Cube > Row;
-		Row.push_back(Cube("110100",-dis,dis,-dis));
-		Row.push_back(Cube("100100",0,dis,-dis));
-		Row.push_back(Cube("101100",dis,dis,-dis));
+		Row.push_back(Cube("110100",0,-dis,dis,-dis));
+		Row.push_back(Cube("100100",1,0,dis,-dis));
+		Row.push_back(Cube("101100",2,dis,dis,-dis));
 		Side.push_back(Row);
 		Row.clear();
 		//dari kiri tengah ke kanan
-		Row.push_back(Cube("110000",-dis,0,-dis));
-		Row.push_back(Cube("100000",0,0,-dis));
-		Row.push_back(Cube("101000",dis,0,-dis));
+		Row.push_back(Cube("110000",3,-dis,0,-dis));
+		Row.push_back(Cube("100000",4,0,0,-dis));
+		Row.push_back(Cube("101000",5,dis,0,-dis));
 		Side.push_back(Row);
 		Row.clear();
 		//dari kiri bawah ke kanan
-		Row.push_back(Cube("110010",-dis,-dis,-dis));
-		Row.push_back(Cube("100010",0,-dis,-dis));
-		Row.push_back(Cube("101010",dis,-dis,-dis));
+		Row.push_back(Cube("110010",6,-dis,-dis,-dis));
+		Row.push_back(Cube("100010",7,0,-dis,-dis));
+		Row.push_back(Cube("101010",8,dis,-dis,-dis));
 		Side.push_back(Row);
 		Row.clear();
 		Rubik.push_back(Side);
 		Side.clear();
 
-		Row.push_back(Cube("010100",-dis,dis,0));
-		Row.push_back(Cube("000100",0,dis,0));
-		Row.push_back(Cube("001100",dis,dis,0));
+		Row.push_back(Cube("010100",9,-dis,dis,0));
+		Row.push_back(Cube("000100",10,0,dis,0));
+		Row.push_back(Cube("001100",11,dis,dis,0));
 		Side.push_back(Row);
 		Row.clear();
 
-		Row.push_back(Cube("010000",-dis,0,0));
-		Row.push_back(Cube("000000",0,0,0));
-		Row.push_back(Cube("001000",dis,0,0));
+		Row.push_back(Cube("010000",12,-dis,0,0));
+		Row.push_back(Cube("000000",13,0,0,0));
+		Row.push_back(Cube("001000",14,dis,0,0));
 		Side.push_back(Row);
 		Row.clear();
 
-		Row.push_back(Cube("010010",-dis,-dis,0));
-		Row.push_back(Cube("000010",0,-dis,0));
-		Row.push_back(Cube("001010",dis,-dis,0));
+		Row.push_back(Cube("010010",15,-dis,-dis,0));
+		Row.push_back(Cube("000010",16,0,-dis,0));
+		Row.push_back(Cube("001010",17,dis,-dis,0));
 		Side.push_back(Row);
 		Row.clear();
 		Rubik.push_back(Side);
 		Side.clear();
 
-		Row.push_back(Cube("010101",-dis,dis,dis));
-		Row.push_back(Cube("000101",0,dis,dis));
-		Row.push_back(Cube("001101",dis,dis,dis));
+		Row.push_back(Cube("010101",18,-dis,dis,dis));
+		Row.push_back(Cube("000101",19,0,dis,dis));
+		Row.push_back(Cube("001101",20,dis,dis,dis));
 		Side.push_back(Row);
 		Row.clear();
 
-		Row.push_back(Cube("010001",-dis,0,dis));
-		Row.push_back(Cube("000001",0,0,dis));
-		Row.push_back(Cube("001001",dis,0,dis));
+		Row.push_back(Cube("010001",21,-dis,0,dis));
+		Row.push_back(Cube("000001",22,0,0,dis));
+		Row.push_back(Cube("001001",23,dis,0,dis));
 		Side.push_back(Row);
 		Row.clear();
 
-		Row.push_back(Cube("010011",-dis,-dis,dis));
-		Row.push_back(Cube("000011",0,-dis,dis));
-		Row.push_back(Cube("001011",dis,-dis,dis));
+		Row.push_back(Cube("010011",24,-dis,-dis,dis));
+		Row.push_back(Cube("000011",25,0,-dis,dis));
+		Row.push_back(Cube("001011",26,dis,-dis,dis));
 		Side.push_back(Row);
 		Row.clear();
 		Rubik.push_back(Side);
@@ -269,6 +282,36 @@ int main(int argc, char** argv) {
         glutMainLoop();
 }
 
+void printRubik(vector < vector < vector < Cube > > > Rubik){
+	for(int i = 0; i < Rubik.size(); i++) {
+		for(int j = 0; j < Rubik[i].size(); j++) {
+			for(int k = 0; k<Rubik[i][j].size(); k++){
+				printf("%d %f %f %f\n",Rubik[i][j][k].getID(),Rubik[i][j][k].getX(),Rubik[i][j][k].getY(),Rubik[i][j][k].getZ());
+			}
+			printf("\n");
+		}
+	}
+	printf("\n\n");
+}
+
+void initRubik (vector < vector < vector < Cube > > > *newRubik) {
+	for (int i=0; i<3; i++) {
+		vector < vector < Cube > > Side;
+		for (int j=0; j<3; j++) {
+			vector < Cube > Row;
+			for (int k=0; k<3; k++) {
+				Cube cube;
+				Row.push_back(cube);
+			}
+			//printf("pushed %d %d",i,j);
+			Side.push_back(Row);
+			//Row.clear();
+		}
+		(*newRubik).push_back(Side);
+		Side.clear();
+	}
+}
+	
 void rotateX(int row, int direction){
 	for(int i = 0; i < Rubik.size(); i++) {
 		for(int j = 0; j < Rubik[i].size(); j++) {
@@ -280,20 +323,41 @@ void rotateX(int row, int direction){
 			}
 		}
 	}
-	vector < vector < vector < Cube > > > newRubik = Rubik;
+	vector < vector < vector < Cube > > > newRubik;
+	initRubik(&newRubik);
+	printf("%d",newRubik[0].size());
+	int x,y,z;
 	for(int i = 0; i < newRubik.size(); i++) {
 		for(int j = 0; j < newRubik[i].size(); j++) {
 			for(int k = 0; k < newRubik[i][j].size(); k++){
-				if(k==row){
-					int x = rubik_size - 1 - j;
-					int y = i;
-					int z = row;
-					newRubik[i][j][k]=Rubik[x][y][z];
+				if (k==row) {
+					x = rubik_size - 1 - j;
+					y = i;
+					z = row;
+					newRubik[i][j][k] = Rubik[x][y][z];
+					printf("swap %d with %d ",Rubik[i][j][k].getID(),Rubik[x][y][z].getID());
+					float posY = newRubik[i][j][k].getY();
+					float posZ = newRubik[i][j][k].getZ();
+					printf("%f %f\n",posY,posZ);
+					if ( (posY > 0 && posZ < 0) || (posY < 0 && posZ > 0) ) {
+						newRubik[i][j][k].setY(-posY);
+					} else if ( (posY < 0 && posZ < 0) || (posY > 0 && posZ > 0) ) {
+						newRubik[i][j][k].setZ(-posZ);
+					} else if (posY == 0 && posZ!=0) {
+						newRubik[i][j][k].setY(posZ);
+						newRubik[i][j][k].setZ(posY);
+					} else if (posZ == 0 && posY!=0) {
+						newRubik[i][j][k].setY(posZ);
+						newRubik[i][j][k].setZ(-posY);
+					}
+				} else {
+					newRubik[i][j][k]=Rubik[i][j][k];
 				}
 			}
-		}
+		} 
 	}
 	Rubik = newRubik;
+	// printRubik(Rubik);
 }
 
 void rotateY(int row, int direction){
@@ -301,26 +365,48 @@ void rotateY(int row, int direction){
 		for(int j = 0; j < Rubik[i].size(); j++) {
 			if(j==row){
 				for(int k = 0; k<Rubik[i][j].size(); k++){
+					printf("ID yg dirotate %d",Rubik[i][j][k].getID());
 					int new_rotateY = (Rubik[i][j][k].getRotateY() + direction) % 4;
 					Rubik[i][j][k].setRotateY(new_rotateY);
 				}
 			}
 		}
 	}
-	vector < vector < vector < Cube > > > newRubik = Rubik;
+	vector < vector < vector < Cube > > > newRubik;
+	initRubik(&newRubik);
 	for(int i = 0; i < newRubik.size(); i++) {
 		for(int j = 0; j < newRubik[i].size(); j++) {
-			if(j==row){
+			if (j==row) {
 				for(int k = 0; k<newRubik[i][j].size(); k++){
 					int x = rubik_size - 1 - k;
 					int y = row;
 					int z = i;
-					newRubik[i][j][k]=Rubik[x][y][z];
+					printf("swap %d with %d\n",Rubik[i][j][k].getID(),Rubik[x][y][z].getID());
+					newRubik[i][j][k] = Rubik[x][y][z];
+					float posX = newRubik[i][j][k].getX();
+					float posZ = newRubik[i][j][k].getZ();
+					if ( (posX < 0 && posZ < 0) || (posX > 0 && posZ > 0) ) {
+						newRubik[i][j][k].setX(-posX);
+					} else if ( (posX > 0 && posZ < 0) || (posX < 0 && posZ > 0) ){
+						newRubik[i][j][k].setZ(-posZ);
+					} else if (posZ == 0 && posX!=0) {
+						newRubik[i][j][k].setX(posZ);
+						newRubik[i][j][k].setZ(posX);
+					} else if (posX == 0 && posZ!=0) {
+						newRubik[i][j][k].setX(-posZ);
+						newRubik[i][j][k].setZ(posX);
+					}
+				}
+			} else {
+				for(int k = 0; k<newRubik[i][j].size(); k++){
+					newRubik[i][j][k] = Rubik[i][j][k];
 				}
 			}
 		}
 	}
 	Rubik = newRubik;
+	printf("Rubik stlh update");
+	// printRubik(Rubik);
 }
 
 void rotateZ(int row, int direction){
@@ -334,7 +420,8 @@ void rotateZ(int row, int direction){
 			}
 		}
 	}
-	vector < vector < vector < Cube > > > newRubik = Rubik;
+	vector < vector < vector < Cube > > > newRubik;
+	initRubik(&newRubik);
 	for(int i = 0; i < newRubik.size(); i++) {
 		if(i==row){
 			for(int j = 0; j < newRubik[i].size(); j++) {
@@ -342,15 +429,34 @@ void rotateZ(int row, int direction){
 					int x = row;
 					int y = rubik_size - 1 - k;
 					int z = j;
-					newRubik[i][j][k]=Rubik[x][y][z];
+					printf("swap %d with %d\n",Rubik[i][j][k].getID(),Rubik[x][y][z].getID());
+					newRubik[i][j][k] = Rubik[x][y][z];
+					float posX = newRubik[i][j][k].getX();
+					float posY = newRubik[i][j][k].getY();
+					printf("%f %f\n",posX,posY);
+					if ( (posX < 0 && posY > 0) || (posX > 0 && posY < 0) ) {
+						newRubik[i][j][k].setX(-posX);
+					} else if ( (posX > 0 && posY > 0) || (posX < 0 && posY < 0) ){
+						newRubik[i][j][k].setY(-posY);
+					} else if (posX == 0 && posY!=0) {
+						newRubik[i][j][k].setX(posY);
+						newRubik[i][j][k].setY(posX);
+					} else if (posY == 0 && posX!=0) {
+						newRubik[i][j][k].setX(posY);
+						newRubik[i][j][k].setY(-posX);
+					}
+				}
+			}
+		} else {
+			for(int j = 0; j < newRubik[i].size(); j++) {
+				for(int k = 0; k < newRubik[i][j].size(); k++){
+					newRubik[i][j][k] = Rubik[i][j][k];
 				}
 			}
 		}
 	}
 	Rubik = newRubik;
-	
-
-
+	// printRubik(Rubik);
 }
 
 void keyboard(unsigned char c, int x, int y) {
@@ -382,35 +488,64 @@ void rotateView(){
 }
  
 void render(void) {
+	//printRubik();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
 	glLoadIdentity();
 	rotateView();
+
 	for(int i = 0;i<Rubik.size();i++){
 		for(int j = 0;j<Rubik[i].size();j++){
 			for(int k = 0;k<Rubik[i][j].size();k++){
+				//Rotate x
 				glPushMatrix();
+				/*for(int x_r=0; x_r<Rubik[i][j][k].getRotateX(); x_r++)
+					glRotatef( -90, 1.0, 0.0, 0.0);*/
+				glPopMatrix();
 				
+				//Rotate y
+				glPushMatrix();
+				/*for(int y_r=0; y_r<Rubik[i][j][k].getRotateY(); y_r++)
+					glRotatef( -90, 0.0, 1.0, 0.0);*/
+				glPopMatrix();
+				
+				//Rotate z
+				glPushMatrix();
+				/*for(int z_r=0; z_r<Rubik[i][j][k].getRotateZ(); z_r++)
+					glRotatef( -90, 0.0, 0.0, 1.0);*/
+				glPopMatrix();
+				
+				glPushMatrix();
+				glTranslatef(Rubik[i][j][k].getX(), Rubik[i][j][k].getY(), Rubik[i][j][k].getZ());
 				//Rotate x
 				for(int x_r=0; x_r<Rubik[i][j][k].getRotateX(); x_r++)
 					glRotatef( -90, 1.0, 0.0, 0.0);
-				
 				//Rotate y
 				for(int y_r=0; y_r<Rubik[i][j][k].getRotateY(); y_r++)
 					glRotatef( -90, 0.0, 1.0, 0.0);
-				
 				//Rotate z
 				for(int z_r=0; z_r<Rubik[i][j][k].getRotateZ(); z_r++)
 					glRotatef( -90, 0.0, 0.0, 1.0);
-				
+				glTranslatef(-1*Rubik[i][j][k].getX(), -1*Rubik[i][j][k].getY(), -1*Rubik[i][j][k].getZ());
+				//if((i==0 && j==0 && k==0) || (i==0 && j==0 && k==1))
+
 				drawCube(Rubik[i][j][k]);
+				
 				glPopMatrix();
 
 			}
 		}
 	}
 	
+	/*drawCube(Rubik[0][0][0]);
+	drawCube(Rubik[0][0][1]);
+	drawCube(Rubik[0][0][2]);
+	drawCube(Rubik[0][1][0]);*/
 	glFlush();
 	glutSwapBuffers();
+	
 	
 }
